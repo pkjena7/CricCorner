@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "492491825545",
+    "firebase_url": "https://criccorner-bd7d2.firebaseio.com",
+    "project_id": "criccorner-bd7d2",
+    "storage_bucket": "criccorner-bd7d2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:492491825545:android:c617ff98af9f75191b8158",
+        "android_client_info": {
+          "package_name": "com.example.criccorner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "492491825545-0t7q647980alnjicukhmj0rkbpg7glsc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOiBxFAs5qTkayiv6kosAU2UE7Q6Ho9GI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "492491825545-0t7q647980alnjicukhmj0rkbpg7glsc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
