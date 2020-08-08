@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.List;
 
@@ -33,9 +35,14 @@ public class AllRounderOdiAdapter extends RecyclerView.Adapter<AllRounderOdiAdap
 
     @Override
     public void onBindViewHolder(@NonNull AllRounderOdiAdapter.ViewHolder holder, int position) {
-        Glide.with(context)
-                .load(itemlist1.get(position).getUrl())
-                .into(holder.imageView);
+
+
+
+//        StorageReference ref = FirebaseStorage.getInstance().getReferenceFromUrl(itemlist1.get(position).getUrl());
+//
+//        Glide.with(context)
+//                .load(ref)
+//                .into(holder.imageView);
 
         holder.textView1.setText(itemlist1.get(position).getRank());
         holder.textView2.setText(itemlist1.get(position).getPlayer());

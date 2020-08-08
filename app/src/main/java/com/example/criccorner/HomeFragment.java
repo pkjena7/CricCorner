@@ -1,6 +1,7 @@
 package com.example.criccorner;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -92,8 +93,9 @@ public class HomeFragment extends Fragment {
 
     }
 
-    public void itemClick(Home homeModel){
-        Toast.makeText(context, "item Clicked : title: "+ homeModel.getTitle(), Toast.LENGTH_SHORT).show();
+    public void itemClick(Home homeList){
+       Intent intent = new Intent(context,News_Details_Activity.class);
+       startActivity(intent);
     }
 
 }
