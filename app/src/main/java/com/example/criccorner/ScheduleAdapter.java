@@ -1,6 +1,7 @@
 package com.example.criccorner;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -19,10 +22,12 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
 
     List<Schedule> itemlist1;
     Context context;
+    Fragment fragment;
 
-    public ScheduleAdapter(List<Schedule> scheduleList, Context context) {
+    public ScheduleAdapter(List<Schedule> scheduleList, Context context, Fragment fragment) {
         this.itemlist1 = scheduleList;
         this.context = context;
+        this.fragment=fragment;
     }
 
     @NonNull
@@ -34,7 +39,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
 
         Glide.with(context)
                 .load(itemlist1.get(position).getUrl1())
@@ -50,6 +55,14 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
         holder.textView5.setText(itemlist1.get(position).getLocation());
         holder.textView6.setText(itemlist1.get(position).getDay());
         holder.textView7.setText(itemlist1.get(position).getMatch_no());
+
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((ScheduleFragment) fragment).itemClick(position);
+            }
+        });
+
     }
 
     @Override
@@ -60,6 +73,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView1,imageView2;
         TextView textView1,textView2,textView3,textView4,textView5,textView6,textView7;
+        CardView cardView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -72,6 +86,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
             textView5 = itemView.findViewById(R.id.location);
             textView6 = itemView.findViewById(R.id.day);
             textView7 = itemView.findViewById(R.id.match_no);
+            cardView = itemView.findViewById(R.id.schedule_card);
 
         }
     }

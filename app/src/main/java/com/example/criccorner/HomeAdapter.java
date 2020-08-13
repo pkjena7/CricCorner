@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -45,10 +46,10 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
         holder.textView.setText(itemlist1.get(position).getTitle());
 
-        holder.imageView.setOnClickListener(new View.OnClickListener() {
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((HomeFragment) fragment).itemClick(itemlist1.get(position));
+                ((HomeFragment) fragment).itemClick(position);
             }
         });
     }
@@ -61,12 +62,13 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
         TextView textView;
+        CardView cardView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.home_image);
             textView = itemView.findViewById(R.id.home_name);
-
+            cardView = itemView.findViewById(R.id.home_card);
         }
     }
 }

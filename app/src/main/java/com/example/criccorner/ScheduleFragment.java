@@ -1,6 +1,7 @@
 package com.example.criccorner;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -32,6 +33,7 @@ public class ScheduleFragment extends Fragment {
     ScheduleAdapter adapter;
     FirebaseFirestore firebaseFirestore;
     List<Schedule> itemlist = new ArrayList<>();
+    Fragment fragment;
 
 
     @Override
@@ -41,6 +43,7 @@ public class ScheduleFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_schedule, container, false);
 
         context = getActivity();
+        fragment=this;
 
         recyclerView = view.findViewById(R.id.schedule_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -87,7 +90,7 @@ public class ScheduleFragment extends Fragment {
                    // Log.d("onDataChange_", "onDataChange: text: " + schedule.getTeam1() + " url: " + schedule.getUrl1());
                 }
 
-                adapter = new ScheduleAdapter(scheduleList, getActivity());
+                adapter = new ScheduleAdapter(scheduleList, getActivity(),fragment);
                 recyclerView.setAdapter(adapter);
 
             }
@@ -98,5 +101,11 @@ public class ScheduleFragment extends Fragment {
             }
         });
 
+    }
+
+    public void itemClick(int position){
+        Intent intent = new Intent(context, MatchDetailsActivity.class);
+        intent.putExtra("position",position);
+        startActivity(intent);
     }
 }

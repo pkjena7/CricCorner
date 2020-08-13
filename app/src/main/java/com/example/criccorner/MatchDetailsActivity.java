@@ -2,8 +2,6 @@ package com.example.criccorner;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -23,50 +21,48 @@ import java.util.List;
 
 import static android.content.ContentValues.TAG;
 
-public class News_Details_Activity extends AppCompatActivity {
-    List<NewsDetails> itemlist = new ArrayList<>();
-    Context context;
+public class MatchDetailsActivity extends AppCompatActivity {
+
     ImageView imageView;
     TextView textView;
-    int position = 0;
+    Context context;
+    int position =0;
+    List<MatchDetailsList> itemlist=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_news__details_);
+        setContentView(R.layout.activity_match_details);
         getSupportActionBar().setTitle("CricCorner");
 
-        context = this;
-
-        if (getIntent() != null) {
-            position = getIntent().getIntExtra("position", 0);
+        imageView=findViewById(R.id.imageview);
+        textView=findViewById(R.id.match_details);
+        context=this;
+        if (getIntent()!=null){
+            position=   getIntent().getIntExtra("position",0);
         }
-
-        imageView = findViewById(R.id.imageview);
-        textView = findViewById(R.id.news_details);
 
         readFirebaseRealtimeDatabase();
     }
-
-    public void readFirebaseRealtimeDatabase() {
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("news_details");
+    public void readFirebaseRealtimeDatabase(){
+        DatabaseReference ref= FirebaseDatabase.getInstance().getReference().child("match_details");
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
-                    NewsDetails newsDetails = singleSnapshot.getValue(NewsDetails.class);
-                    itemlist.add(newsDetails);
+                for (DataSnapshot singleSnapshot:dataSnapshot.getChildren()){
+                    MatchDetailsList matchDetailsList= singleSnapshot.getValue(MatchDetailsList.class);
+                    itemlist.add(matchDetailsList);
                 }
 
-                if (position < itemlist.size()) {
+                if (position<itemlist.size()){
 
-                    NewsDetails newsModel = itemlist.get(position);
+                    MatchDetailsList matchDetailsList = itemlist.get(position);
 
                     Glide.with(context)
-                            .load(newsModel.getUrl())
+                            .load(matchDetailsList.getUrl())
                             .into(imageView);
 
-                    textView.setText(newsModel.getNews());
+                    textView.setText(matchDetailsList.getMatch_details());
 
                 }
             }

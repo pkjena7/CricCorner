@@ -93,8 +93,9 @@ public class HomeFragment extends Fragment {
 
     }
 
-    public void itemClick(Home homeList){
+    public void itemClick(int position){
        Intent intent = new Intent(context,News_Details_Activity.class);
+       intent.putExtra("position",position);
        startActivity(intent);
     }
 
