@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,6 +32,7 @@ public class PlayerTestFragment extends Fragment {
     RecyclerView recyclerView;
     PlayerTestAdapter adapter;
     FirebaseFirestore firebaseFirestore;
+    ProgressBar pb;
     List<Player> itemlist = new ArrayList<>();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,6 +43,7 @@ public class PlayerTestFragment extends Fragment {
         context = getActivity();
 
         recyclerView = view.findViewById(R.id.player_test_recycler);
+        pb = view.findViewById(R.id.pb);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         readFirebaseRealtimeDatabase();
@@ -50,7 +53,7 @@ public class PlayerTestFragment extends Fragment {
     public void readFirebaseRealtimeDatabase() {
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("ranking_player");
-
+        pb.setVisibility(View.VISIBLE);
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -66,6 +69,7 @@ public class PlayerTestFragment extends Fragment {
 
                 adapter = new PlayerTestAdapter(playerList, getActivity());
                 recyclerView.setAdapter(adapter);
+                pb.setVisibility(View.GONE);
 
             }
 

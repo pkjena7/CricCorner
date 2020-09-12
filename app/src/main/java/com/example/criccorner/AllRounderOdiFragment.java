@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,6 +32,7 @@ public class AllRounderOdiFragment extends Fragment {
     RecyclerView recyclerView;
     AllRounderOdiAdapter adapter;
     FirebaseFirestore firebaseFirestore;
+    ProgressBar pb;
     List<OdiAllRounder> itemlist = new ArrayList<>();
 
 
@@ -43,6 +45,7 @@ public class AllRounderOdiFragment extends Fragment {
         context = getActivity();
 
         recyclerView = view.findViewById(R.id.allrounder_odi_recycler);
+        pb = view.findViewById(R.id.pb);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         readFirebaseRealtimeDatabase();
@@ -52,7 +55,7 @@ public class AllRounderOdiFragment extends Fragment {
     public void readFirebaseRealtimeDatabase() {
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("odi_allrounder");
-
+        pb.setVisibility(View.VISIBLE);
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -68,7 +71,7 @@ public class AllRounderOdiFragment extends Fragment {
 
                 adapter = new AllRounderOdiAdapter(playerList, getActivity());
                 recyclerView.setAdapter(adapter);
-
+                pb.setVisibility(View.GONE);
             }
 
             @Override

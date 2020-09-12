@@ -3,6 +3,7 @@ package com.example.criccorner;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.PagerAdapter;
@@ -27,6 +28,8 @@ public class RankingFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_ranking, container, false);
         viewPager = view.findViewById(R.id.viewpager);
         tabLayout = view.findViewById(R.id.tablayout);
+
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("ICC Ranking");
 
         return view;
     }

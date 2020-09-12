@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -33,8 +35,10 @@ public class HomeFragment extends Fragment {
     Fragment fragment;
     RecyclerView recyclerView;
     HomeAdapter adapter;
-    FirebaseFirestore firebaseFirestore;
-    List<Home> itemlist = new ArrayList<>();
+ //   FirebaseFirestore firebaseFirestore;
+//    List<Home> itemlist = new ArrayList<>();
+    ProgressBar pb;
+
 
 
     @Override
@@ -46,7 +50,11 @@ public class HomeFragment extends Fragment {
         context = getActivity();
         fragment = this;
 
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("CricCorner");
+
+
         recyclerView = view.findViewById(R.id.home_recycler);
+        pb = view.findViewById(R.id.pb);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 //        addDataToList();
@@ -57,7 +65,7 @@ public class HomeFragment extends Fragment {
 //        adapter = new HomeAdapter(itemlist);
 //        recyclerView.setAdapter(adapter);
 
-        firebaseFirestore = FirebaseFirestore.getInstance();
+//        firebaseFirestore = FirebaseFirestore.getInstance();
 
         return view;
     }
@@ -66,6 +74,7 @@ public class HomeFragment extends Fragment {
     public void readFirebaseRealtimeDatabase() {
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("news");
+        pb.setVisibility(View.VISIBLE);
 
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -82,6 +91,7 @@ public class HomeFragment extends Fragment {
 
                 adapter = new HomeAdapter(homeList, getActivity(), fragment);
                 recyclerView.setAdapter(adapter);
+                pb.setVisibility(View.GONE);
 
             }
 
@@ -90,6 +100,7 @@ public class HomeFragment extends Fragment {
                 Log.e(TAG, "onCancelled", databaseError.toException());
             }
         });
+
 
     }
 

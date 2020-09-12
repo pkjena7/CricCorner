@@ -7,11 +7,15 @@
         android:icon="@drawable/ic_baseline_home_24"/>
 
     <item
-        android:title="Schedule"
+        android:title="Matches"
         android:id="@+id/schedule"
-        android:icon="@drawable/ic_baseline_schedule_24"/>
+        android:icon="@drawable/ic_baseline_sports_cricket_24"/>
     <item
         android:title="Ranking"
         android:id="@+id/ranking"
         android:icon="@drawable/ic_baseline_format_list_numbered_24"/>
+    <item
+        android:title="More"
+        android:id="@+id/more"
+        android:icon="@drawable/ic_baseline_more_horiz_24"/>
 </menu>

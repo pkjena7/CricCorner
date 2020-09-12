@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -29,6 +31,7 @@ public class News_Details_Activity extends AppCompatActivity {
     ImageView imageView;
     TextView textView;
     int position = 0;
+    ProgressBar pb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +47,14 @@ public class News_Details_Activity extends AppCompatActivity {
 
         imageView = findViewById(R.id.imageview);
         textView = findViewById(R.id.news_details);
+        pb = findViewById(R.id.pb);
 
         readFirebaseRealtimeDatabase();
     }
 
     public void readFirebaseRealtimeDatabase() {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("news_details");
+        pb.setVisibility(View.VISIBLE);
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -69,6 +74,7 @@ public class News_Details_Activity extends AppCompatActivity {
                     textView.setText(newsModel.getNews());
 
                 }
+                pb.setVisibility(View.GONE);
             }
 
             @Override

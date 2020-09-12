@@ -23,8 +23,8 @@
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_alignParentBottom="true"
-
-        android:background="#93EC2A"
+        android:background="#ffffff"
+        app:labelVisibilityMode="labeled"
         app:itemIconTint="@drawable/selector"
         app:itemTextColor="@drawable/selector"
         app:menu="@menu/menu_navigation" />
